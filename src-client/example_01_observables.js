@@ -1,6 +1,6 @@
 import Rx from "rxjs/Rx";
 import { createSubscriber} from './lib/util';
-
+import { consoleLog} from './lib/util';
 //
 // const promise = new Promise((resolve, reject)=>{
 //   console.log("In promise...");
@@ -42,25 +42,24 @@ import { createSubscriber} from './lib/util';
 //   });
 // }, 3000);
 
-
 const myObservable$ = new Rx.Observable(observer=>{
-  console.log("shit's getting observed!")
+  consoleLog("shit's getting observed!")
   setTimeout(()=>{
     observer.next(console.log("This is getting observed as well."));
   },3000)
 });
 
 myObservable$.subscribe(
-  data=>{console.log(`this is from the subscription:${data}`)},
+  data=>{consoleLog(`this is from the subscription:${data}`)},
   error=>{console.error(error)},
-  ()=>{console.log("the observable completed")}
+  ()=>{consoleLog("the observable completed")}
 );
 
 function createInterval$(time){
   return new Rx.Observable(observer=>{
     let index = 0;
     let interval = setInterval(()=>{
-      console.log(`Generating ${index}`);
+      consoleLog(`Generating ${index}`);
       observer.next(index++);
     },time);
     return ()=>{

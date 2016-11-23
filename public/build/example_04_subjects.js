@@ -15571,18 +15571,26 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.createSubscriber = createSubscriber;
+exports.consoleLog = consoleLog;
 function createSubscriber(tag) {
   return {
     next: function next(item) {
-      console.log(tag + ".next " + item);
+      consoleLog(tag + ".next " + item);
     },
     error: function error(_error) {
-      console.log(tag + ".error");
+      consoleLog(tag + ".error");
     },
     complete: function complete() {
-      console.log(tag + ".complete");
+      consoleLog(tag + ".complete");
     }
   };
+}
+
+function consoleLog(msg) {
+  var display = document.getElementById("display");
+  var newDiv = document.createElement('div');
+  newDiv.textContent = msg;
+  display.appendChild(newDiv);
 }
 
 },{}]},{},[343]);

@@ -15548,13 +15548,13 @@ exports.tryCatch = tryCatch;
 ;
 
 },{"./errorObject":328}],342:[function(require,module,exports){
-"use strict";
+'use strict';
 
-var _Rx = require("rxjs/Rx");
+var _Rx = require('rxjs/Rx');
 
 var _Rx2 = _interopRequireDefault(_Rx);
 
-var _util = require("./lib/util");
+var _util = require('./lib/util');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -15599,27 +15599,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //   });
 // }, 3000);
 
-
 var myObservable$ = new _Rx2.default.Observable(function (observer) {
-  console.log("shit's getting observed!");
+  (0, _util.consoleLog)("shit's getting observed!");
   setTimeout(function () {
     observer.next(console.log("This is getting observed as well."));
   }, 3000);
 });
 
 myObservable$.subscribe(function (data) {
-  console.log("this is from the subscription:" + data);
+  (0, _util.consoleLog)('this is from the subscription:' + data);
 }, function (error) {
   console.error(error);
 }, function () {
-  console.log("the observable completed");
+  (0, _util.consoleLog)("the observable completed");
 });
 
 function createInterval$(time) {
   return new _Rx2.default.Observable(function (observer) {
     var index = 0;
     var interval = setInterval(function () {
-      console.log("Generating " + index);
+      (0, _util.consoleLog)('Generating ' + index);
       observer.next(index++);
     }, time);
     return function () {
@@ -15664,6 +15663,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.createSubscriber = createSubscriber;
+exports.consoleLog = consoleLog;
 function createSubscriber(tag) {
   return {
     next: function next(item) {
@@ -15676,6 +15676,13 @@ function createSubscriber(tag) {
       console.log(tag + ".complete");
     }
   };
+}
+
+function consoleLog(msg) {
+  var display = document.getElementById("display");
+  var newDiv = document.createElement('div');
+  newDiv.textContent = msg;
+  display.appendChild(newDiv);
 }
 
 },{}]},{},[342]);
